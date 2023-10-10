@@ -10,6 +10,9 @@ public class Main {
         ArrayList<PessoaFisica> listaPf = new ArrayList<>();
         PessoaFisica metodosPf = new PessoaFisica();
 
+        ArrayList<PessoaJuridica> listaPj = new ArrayList<>();
+        PessoaJuridica medodoPj = new PessoaJuridica();
+
         System.out.println("Bem vindo ao sistema de cadastro de Pessoa Fisica e Pessoa Juridica");
 
         Scanner scanner = new Scanner(System.in);
@@ -116,6 +119,70 @@ public class Main {
                     } while(opcao != 0);
                     break;
                 case 2:
+                    int opcaoPj;
+                    do{
+                        System.out.println("Esolha uma opção: 1 - Cadastrar Pessoa Juridica / 2 - Listas Pessoa Juridica / 0 - Voltar ao Menu Anterior");
+                        opcao = scanner.nextInt();
+
+                        switch(opcao){
+                            case 1:
+                                PessoaJuridica novapj = new PessoaJuridica();
+                                Endereco novoEndPj = new Endereco();
+
+                                System.out.println("Digite o CNPJ: ");
+                                novapj.cnpj = scanner.next();
+
+                                System.out.println("Digite a Razão Social: ");
+                                novapj.razaoSocial = scanner.next();
+
+                                System.out.println("Digite o redimento mensal(Somente números): ");
+                                novapj.rendimento = scanner.nextInt();
+
+                                System.out.println("Digite o logradouro: ");
+                                novoEndPj.logradouro = scanner.next();
+
+                                System.out.println("Digite o número: ");
+                                novoEndPj.numero = scanner.next();
+
+                                System.out.println("É endereço comercial? S/N: ");
+                                String endCom;
+                                endCom = scanner.next();
+
+                                if (endCom.equalsIgnoreCase("S")){
+                                    novoEndPj.enderecoComercial = true;
+                                }else{
+                                    novoEndPj.enderecoComercial = false;
+                                }
+
+                                novapj.endereco = novoEndPj;
+
+                                listaPj.add(novapj);
+
+                                System.out.println("Cadastro Realizado com Sucesso");
+                                break;
+
+                            case 2:
+                                if(listaPj.size() > 0){
+
+                                    for (PessoaJuridica cadaPj : listaPj){
+                                        System.out.println();
+                                        System.out.println("CNPJ: " + cadaPj.cnpj);
+                                        System.out.println("Razão Social: " + cadaPj.razaoSocial);
+                                        System.out.println("Endereço: " + cadaPj.endereco.logradouro + ", " + cadaPj.endereco.numero);
+//                                        System.out.println("Imposto a ser pago: " + metodosPf.CalcularImposto(cadaPf.rendimento));
+                                        System.out.println();
+                                        System.out.println("Digite 0 para continuar");
+                                        scanner.nextLine();
+                                    }
+
+                                    opcaoPf = scanner.nextInt();
+
+
+                                } else {
+                                    System.out.println("Lista Vazia");
+                                }
+                        }
+                    } while (opcao != 0);
                     break;
                 case 0:
                     System.out.println("Obrigado por utilizar o sistema!");
